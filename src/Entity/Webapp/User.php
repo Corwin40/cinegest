@@ -2,12 +2,19 @@
 
 namespace App\Entity\Webapp;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Webapp\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ApiResource(
+ *     normalizationContext={
+ *          "groups"={"users_read"}
+ *     }
+ * )
  */
 class User implements UserInterface
 {
@@ -15,47 +22,65 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"users_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @Groups({"users_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     *
+     * @Groups({"users_read"})
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     *
+     * @Groups({"users_read"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"users_read"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"users_read"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     *
+     * @Groups({"users_read"})
      */
     private $isValid;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"users_read"})
      */
     private $createAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"users_read"})
      */
     private $updateAt;
 
