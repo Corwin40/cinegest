@@ -16,7 +16,9 @@ import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import UsersPage from "./pages/UsersPage";
+import VideosPage from "./pages/VideosPage";
 import DashboardPage from "./pages/DashboardPage";
+
 
 const NavBarWithRouter = withRouter(NavBar);
 
@@ -27,6 +29,7 @@ const Admin = () => {
                 <NavBarWithRouter/>
                 <div className="container-fluid pt-3">
                     <Switch>
+                        <Route path="/videos" component={VideosPage} />
                         <Route path="/users" component={UsersPage} />
                         <Route path="/" component={DashboardPage} />
                     </Switch>
