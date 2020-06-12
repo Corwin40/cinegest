@@ -4,12 +4,23 @@
  * We recommend including the built version of this JavaScript file
  * (and its CSS file) in your base layout (base.html.twig).
  */
-
-// any CSS you import will output into a single css file (app.scss in this case)
-import '../scss/app.scss';
+import '../scss/admin.scss';
 const $ =require('jquery');
 require('bootstrap');
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const Admin = () => {
+    return (
+        <div>
+            <h1>Admin</h1>
+        </div>
+)
+    ;
+};
+
+const rootElement = document.querySelector("#Admin");
+ReactDOM.render(<Admin/>, rootElement);
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
