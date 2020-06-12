@@ -10,8 +10,5 @@ Mise en place d'une application permettant de gérer :
 Application développée sous symfony avec un fronted React et une partie API-Rest (Api-platform)
 
 ### Démarrage
-<<<<<<< HEAD
- - [installation du projet](https://github.com/Corwin40/cinegest/blob/Dev0.1/docs/installation.md)
-=======
- - [installation du projet](https://)
->>>>>>> Dev0.1
+
+* [installation du projet](https://github.com/Corwin40/cinegest/blob/Dev0.1/docs/installation.md)
