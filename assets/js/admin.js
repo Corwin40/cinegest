@@ -11,11 +11,14 @@ require('bootstrap');
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+
+
 const Admin = () => {
     return (
-        <div>
+        <main>
             <h1>Admin</h1>
-        </div>
+
+        </main>
 )
     ;
 };
