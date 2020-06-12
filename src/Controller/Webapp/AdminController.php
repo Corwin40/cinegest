@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class AdminController
  * @package App\Controller\Webapp
- * @Route("/", name="cinegest_webpack_admin_dashboard")
+ * @Route("/", name="cinegest_webpack_admin_")
  */
 class AdminController extends AbstractController
 {

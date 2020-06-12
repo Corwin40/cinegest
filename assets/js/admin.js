@@ -7,9 +7,12 @@
 import '../scss/admin.scss';
 const $ =require('jquery');
 require('bootstrap');
-
+// listes des imports outils react
 import React from 'react';
 import ReactDOM from 'react-dom';
+// liste des imports composants react
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 
 
@@ -17,7 +20,8 @@ const Admin = () => {
     return (
         <main>
             <h1>Admin</h1>
-
+            <NavBar/>
+            <Footer/>
         </main>
 )
     ;

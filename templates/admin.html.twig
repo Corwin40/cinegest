@@ -4,13 +4,21 @@
         <meta charset="UTF-8">
         <title>{% block title %}CineGest - Admin{% endblock %}</title>
         {% block stylesheets %}
-            {{ encore_entry_link_tags('admin') }}
+            {% if app.request.get('_route') == 'cinegest_webpack_admin_dashboard' %}
+                {{ encore_entry_link_tags('admin') }}
+            {% elseif app.request.get('_route') == 'cinegest_webapp_logs_login' %}
+                {{ encore_entry_link_tags('login') }}
+            {% endif %}
         {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
-            {{ encore_entry_script_tags('admin') }}
+            {% if app.request.get('_route') == 'cinegest_webpack_admin_dashboard' %}
+                {{ encore_entry_script_tags('admin') }}
+            {% elseif app.request.get('_route') == 'cinegest_webapp_logs_login' %}
+                {{ encore_entry_script_tags('login') }}
+            {% endif %}
         {% endblock %}
     </body>
 </html>

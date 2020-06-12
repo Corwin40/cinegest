@@ -1,8 +1,8 @@
 import React from 'react';
 
-function NavBar(props) {
+const NavBar = () => {
     return (
-        <div></div>
+        <div> NavBar</div>
     );
 }
 
