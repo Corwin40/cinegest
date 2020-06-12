@@ -13,8 +13,8 @@ import ReactDOM from 'react-dom';
 import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
 
 // liste des imports composants react
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import NavBar from "./components/modules/NavBar";
+import Footer from "./components/modules/Footer";
 import UsersPage from "./pages/UsersPage";
 import VideosPage from "./pages/VideosPage";
 import DashboardPage from "./pages/DashboardPage";
