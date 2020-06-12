@@ -8,7 +8,6 @@ const Footer = () => {
             <div className="container-fluid">
                 <p><FontAwesomeIcon icon={faCopyright}/> 2020 - OpenPixl</p>
             </div>
-            <p>Footer</p>
         </footer>
     );
 }

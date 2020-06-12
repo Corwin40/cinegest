@@ -8,7 +8,7 @@ import Pagination from "../components/tools/Pagination";
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Modal, Card } from 'react-bootstrap';
 
 
 const DashboardPage = () => {
@@ -17,6 +17,11 @@ const DashboardPage = () => {
     const [users, setUsers] = useState([])
     const [currentPage, setCurrentPage] = useState(1); // state pour initialiser le départ de la boucle de pagination
     const [search, setSearch] = useState("");
+
+    const [show, setShow] = useState(false);
+
+    const handleDeleteModalClose = () => setShow(false);
+    const handleDeleteModalShow = () => setShow(true);
 
     // récupération des chaque itération sur l'entité User
 
@@ -56,50 +61,74 @@ const DashboardPage = () => {
     );
 
     return (
-        <div>
-            <div className="alert alert-dismissible alert-light">
-                <h1><strong>Bienvenue</strong> sur la page des utilisateurs de la plateforme</h1><hr/>A partir de cette page, vous pouvez ajouter, modifier, supprimer un utilisateur de la plateforme ...
+        <div className="row">
+            <div className="col-2">
+                <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                        <Card.Title>UTILISATEUR</Card.Title>
+                        <Card.Text>
+                            <h1><strong>Bienvenue</strong></h1><hr/>
+                            A partir de cette page, vous pouvez ajouter, modifier, supprimer un utilisateur de la plateforme ...
+
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </div>
+            <div className="col-10">
+                <table className="table table-sm table-hover">
+                    <thead>
+                    <tr>
+                        <th> <Form.Check disabled/></th>
+                        <th>id</th>
+                        <th>Nom et Prénom</th>
+                        <th>Email</th>
+                        <th>Compte actif ?</th>
+                        <th>Créer le</th>
+                        <th>Modifier le</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {paginatedUsers.map(user => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
+                        <tr key={user.id}>
+                            <td><Form.Check /></td>
+                            <td>{user.id}</td>
+                            <td><Link to={"/users/" + user.id}>{user.firstName} {user.lastName}</Link></td>
+                            <td>{user.email}</td>
+                            <td>{user.isactive > 0 && <p>Oui</p> || <p>Non</p> }</td>
+                            <td>{formatDate(user.createAt)}</td>
+                            <td>{formatDate(user.updateAt)}</td>
+                            <td>
+                                <Link
+                                    className="btn btn-sm btn-primary mr-1"
+                                    to={"/users/" + user.id}><FontAwesomeIcon icon={faEdit} size="xs" />
+                                </Link>
+                                <button
+                                    onClick={handleDeleteModalShow}                       // Active la fonction "handleDelete"
+                                    className="btn btn-sm btn-danger">
+                                    <FontAwesomeIcon icon={faUserTimes} size="xs" />
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
             </div>
 
-            <table className="table table-sm table-hover">
-                <thead>
-                <tr>
-                    <th> <Form.Check disabled/></th>
-                    <th>id</th>
-                    <th>Nom et Prénom</th>
-                    <th>Email</th>
-                    <th>Compte actif ?</th>
-                    <th>Créer le</th>
-                    <th>Modifier le</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {paginatedUsers.map(user => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
-                    <tr key={user.id}>
-                        <td></td>
-                        <td>{user.id}</td>
-                        <td><Link to={"/users/" + user.id}>{user.firstName} {user.lastName}</Link></td>
-                        <td>{user.email}</td>
-                        <td>{user.isactive > 0 && <p>Oui</p> || <p>Non</p> }</td>
-                        <td>{formatDate(user.createAt)}</td>
-                        <td>{formatDate(user.updateAt)}</td>
-                        <td>
-                            <Link
-                                className="btn btn-sm btn-primary mr-1"
-                                to={"/users/" + user.id}><FontAwesomeIcon icon={faEdit} />
-                            </Link>
-                            <button
-                                onClick={() => handleDelete(user.id)}                       // Active la fonction "handleDelete"
-                                className="btn btn-sm btn-danger">
-                                <FontAwesomeIcon icon={faUserTimes} />
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-
+            <Modal show={show} onHide={handleDeleteModalClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Attention</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Vous êtes sur le point de supprimer l'utilisateur de la base de données.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleDeleteModalClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleDeleteModalClose}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
 
 
