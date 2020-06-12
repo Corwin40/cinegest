@@ -8,3 +8,6 @@ Mise en place d'une application permettant de gérer :
 
 ### Support
 Application développée sous symfony avec un fronted React et une partie API-Rest (Api-platform)
+
+### Démarrage
+ - [installation du projet](https://)
