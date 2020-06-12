@@ -8,23 +8,35 @@ import '../scss/admin.scss';
 const $ =require('jquery');
 require('bootstrap');
 // listes des imports outils react
-import React from 'react';
+import React, { useState, useContext} from 'react';
 import ReactDOM from 'react-dom';
+import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
+
 // liste des imports composants react
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import UsersPage from "./pages/UsersPage";
+import DashboardPage from "./pages/DashboardPage";
 
-
+const NavBarWithRouter = withRouter(NavBar);
 
 const Admin = () => {
     return (
-        <main>
-            <h1>Admin</h1>
-            <NavBar/>
-            <Footer/>
-        </main>
-)
-    ;
+        <HashRouter>
+            <main>
+                <NavBarWithRouter/>
+                <div className="container-fluid pt-3">
+                    <Switch>
+                        <Route path="/users" component={UsersPage} />
+                        <Route path="/" component={DashboardPage} />
+                    </Switch>
+                </div>
+                <Footer/>
+            </main>
+        </HashRouter>
+
+);
+
 };
 
 const rootElement = document.querySelector("#Admin");
