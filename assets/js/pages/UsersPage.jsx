@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import Pagination from "../components/tools/Pagination";
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faUserTimes, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Form, Button, Modal, Card } from 'react-bootstrap';
 
 
@@ -73,6 +73,24 @@ const DashboardPage = () => {
                         </Card.Text>
                     </Card.Body>
                 </Card>
+                <div className="row">
+                    <div className="col-4">
+                        <Card>
+                            <Card.Body>
+                                <Card.Text>
+                                    <FontAwesomeIcon icon={faPlusSquare} size="lg"/>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                    <div className="col-4">
+
+                    </div>
+
+                    <div className="col-4">
+
+                    </div>
+                </div>
             </div>
             <div className="col-10">
                 <table className="table table-sm table-hover">
@@ -100,12 +118,12 @@ const DashboardPage = () => {
                             <td>{formatDate(user.updateAt)}</td>
                             <td>
                                 <Link
-                                    className="btn btn-sm btn-primary mr-1"
+                                    className="btn btn-xs btn-primary mr-1"
                                     to={"/users/" + user.id}><FontAwesomeIcon icon={faEdit} size="xs" />
                                 </Link>
                                 <button
                                     onClick={handleDeleteModalShow}                       // Active la fonction "handleDelete"
-                                    className="btn btn-sm btn-danger">
+                                    className="btn btn-xs btn-danger">
                                     <FontAwesomeIcon icon={faUserTimes} size="xs" />
                                 </button>
                             </td>
