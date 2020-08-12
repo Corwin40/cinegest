@@ -141,7 +141,7 @@ const VideoForm = ({show, onHide, value, history }) => {
                     ||
                     <button className="btn btn-sm btn-success mr-1">Modifier</button>
                     }
-                    <Button variant="primary">
+                    <Button variant="primary" size="sm">
                         Retour à la liste
                     </Button>
                 </div>

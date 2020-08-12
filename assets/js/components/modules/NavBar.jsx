@@ -1,7 +1,25 @@
 import React, {useContext, useState} from 'react';
 import {NavLink} from "react-router-dom";
+import authAPI from "../../services/authAPI";
+import AuthContext from "../../context/AuthContext";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
-const NavBar = () => {
+authAPI.setup();
+
+const NavBar = ({history}) => {
+
+    const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
+
+    const [user, setUser] = useState(
+        authAPI.valueUser()
+    );
+
+    const handleLogout = () => {
+        authAPI.logout();
+        setIsAuthenticated(false);
+        history.push("/login");
+    };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <NavLink className="navbar-brand" to="/">CineGest</NavLink>
@@ -14,9 +32,34 @@ const NavBar = () => {
                         <NavLink className="nav-link" to="/videos">Vidéothèque<span className="sr-only">(current)</span></NavLink>
                     </li>
                     <li className="nav-item">
+                        <NavLink className="nav-link" to="/seances">Séances<span className="sr-only">(current)</span></NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="nav-link" to="/users">Utilisateur<span className="sr-only">(current)</span></NavLink>
                     </li>
-
+                </ul>
+                <ul className="navbar-nav ml-auto">
+                    {(!isAuthenticated && (
+                        <>
+                            <li className="nav-item">
+                                <NavLink className="btn btn-secondary mr-1">
+                                    Inscription
+                                </NavLink>
+                            </li>
+                            <li className="navitem">
+                                <NavLink className="btn btn-success mr-1">
+                                    Connexion
+                                </NavLink>
+                            </li>
+                        </>
+                    )) || (
+                        <>
+                            <NavDropdown title={"Bienvenue " + user.firstname + " " + user.lastname} id="basic-nav-dropdown">
+                                <NavDropdown.Item href="#/home">Mon Compte</NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleLogout}>Déconnexion</NavDropdown.Item>
+                            </NavDropdown>
+                        </>
+                    )}
                 </ul>
             </div>
         </nav>
