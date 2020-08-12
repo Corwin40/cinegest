@@ -16,7 +16,7 @@ import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
 import NavBar from "./components/modules/NavBar";
 import Footer from "./components/modules/Footer";
 import UsersPage from "./pages/UsersPage";
-import VideosPage from "./pages/VideosPage";
+import VideosPage from "./pages/Videos/VideosPage";
 import DashboardPage from "./pages/DashboardPage";
 
 

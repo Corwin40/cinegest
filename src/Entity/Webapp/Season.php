@@ -7,10 +7,15 @@ use App\Repository\Webapp\SeasonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=SeasonRepository::class)
+ * @ApiResource(
+ *     normalizationContext={
+ *          "groups"={"season_read"}
+ *     }
+ * )
  */
 class Season
 {
@@ -18,41 +23,56 @@ class Season
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"season_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=20)
+     *
+     * @Groups({"season_read", "videos_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"season_read"})
      */
     private $initAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"season_read"})
      */
     private $endAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"season_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"season_read"})
+     *
      */
     private $createAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"season_read"})
      */
     private $updateAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Video::class, mappedBy="season")
+     * @Groups({"season_read"})
      */
     private $videos;
 

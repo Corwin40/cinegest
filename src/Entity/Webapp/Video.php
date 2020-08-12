@@ -5,10 +5,15 @@ namespace App\Entity\Webapp;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Webapp\VideoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VideoRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={
+ *          "groups"={"videos_read"}
+ *     }
+ * )
  */
 class Video
 {
@@ -16,51 +21,71 @@ class Video
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"videos_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"videos_read"})
      */
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=6, nullable=true)
+     *
+     * @Groups({"videos_read"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
+     *
+     * @Groups({"videos_read"})
      */
     private $lettre;
 
     /**
      * @ORM\Column(type="string", length=4, nullable=true)
+     *
+     * @Groups({"videos_read"})
      */
     private $annee;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"videos_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"videos_read"})
      */
     private $filename;
 
     /**
      * @ORM\ManyToOne(targetEntity=Season::class, inversedBy="videos")
+     *
+     * @Groups({"videos_read"})
      */
     private $season;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"videos_read"})
      */
     private $createAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"videos_read"})
      */
     private $updateAt;
 

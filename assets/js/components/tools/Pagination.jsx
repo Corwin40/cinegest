@@ -4,9 +4,10 @@ const Pagination = ({currentPage, itemsPerPage, length, onPageChanged}) => {
 
     const pagesCount = Math.ceil(length/itemsPerPage);         // Math.ceil : fonction d'arrondi au supérieur
     const pages = [];
-    for (let i = 1; i <= pagesCount ; i++){
-        pages.push(i)
-    }
+    for (let i = 1; i <= pagesCount ; i++)
+        {
+            pages.push(i)
+        }
     return (
         <div>
             <ul className="pagination pagination-sm">

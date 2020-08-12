@@ -9,6 +9,7 @@ import Pagination from "../components/tools/Pagination";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faUserTimes, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Form, Button, Modal, Card } from 'react-bootstrap';
+import Search from "../components/Forms/Search";
 
 
 const DashboardPage = () => {
@@ -60,37 +61,33 @@ const DashboardPage = () => {
         itemsPerPage
     );
 
+    // Mise en place de la fonction de recherche
+    const handleSearch = ({currentTarget}) => {
+        setSearch(currentTarget.value);
+        setCurrentPage(1);
+    };
+
     return (
         <div className="row">
             <div className="col-2">
-                <Card style={{ width: '18rem' }}>
-                    <Card.Body>
-                        <Card.Title>UTILISATEUR</Card.Title>
-                        <Card.Text>
-                            <h1><strong>Bienvenue</strong></h1><hr/>
-                            A partir de cette page, vous pouvez ajouter, modifier, supprimer un utilisateur de la plateforme ...
-
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
                 <div className="row">
-                    <div className="col-4">
-                        <Card>
+                    <div className="col-12">
+                        <Card style={{ width: '18rem' }}>
                             <Card.Body>
+                                <Card.Title>UTILISATEUR</Card.Title>
                                 <Card.Text>
-                                    <FontAwesomeIcon icon={faPlusSquare} size="lg"/>
                                 </Card.Text>
                             </Card.Body>
                         </Card>
                     </div>
-                    <div className="col-4">
+                </div>
 
-                    </div>
-
-                    <div className="col-4">
-
+                <div className="row">
+                    <div className="col-12">
+                        <Search onChange={handleSearch} value={search} />
                     </div>
                 </div>
+
             </div>
             <div className="col-10">
                 <table className="table table-sm table-hover">
