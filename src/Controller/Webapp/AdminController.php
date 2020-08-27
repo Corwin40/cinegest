@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="dashboard")
+     * @Route("/", name="dashboard")
      */
     public function index()
     {

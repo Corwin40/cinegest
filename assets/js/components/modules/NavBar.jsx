@@ -9,7 +9,6 @@ authAPI.setup();
 const NavBar = ({history}) => {
 
     const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
-
     const [user, setUser] = useState(
         authAPI.valueUser()
     );
@@ -22,7 +21,7 @@ const NavBar = ({history}) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <NavLink className="navbar-brand" to="/">CineGest</NavLink>
+            <NavLink className="navbar-brand" to="/home">CineGest</NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon" />
             </button>
@@ -35,6 +34,9 @@ const NavBar = ({history}) => {
                         <NavLink className="nav-link" to="/seances">Séances<span className="sr-only">(current)</span></NavLink>
                     </li>
                     <li className="nav-item">
+                        <NavLink className="nav-link" to="/fiches">Fiches Adhesions<span className="sr-only">(current)</span></NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="nav-link" to="/users">Utilisateur<span className="sr-only">(current)</span></NavLink>
                     </li>
                 </ul>
@@ -42,14 +44,14 @@ const NavBar = ({history}) => {
                     {(!isAuthenticated && (
                         <>
                             <li className="nav-item">
-                                <NavLink className="btn btn-secondary mr-1">
+                                <a className="btn btn-sm btn-secondary mr-1">
                                     Inscription
-                                </NavLink>
+                                </a>
                             </li>
-                            <li className="navitem">
-                                <NavLink className="btn btn-success mr-1">
+                            <li className="nav-item">
+                                <a className="btn btn-sm btn-success mr-1">
                                     Connexion
-                                </NavLink>
+                                </a>
                             </li>
                         </>
                     )) || (

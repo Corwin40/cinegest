@@ -1,9 +1,6 @@
-$primary: darken(#428bca, 20%);
-$danger: darken(#dc3545,20%);
-
-@import "~bootswatch/dist/materia/variables";
+@import "~bootswatch/dist/yeti/variables";
 @import "~bootstrap/scss/bootstrap";
-@import "~bootswatch/dist/materia/bootswatch";
+@import "~bootswatch/dist/yeti/bootswatch";
 
 .footer {
   position: fixed;
@@ -19,9 +16,16 @@ body{
   height: 100vh;
 }
 
-.btn-xs, .btn-group-xs > .btn {padding: 0.15rem 0.4rem;
+.btn-xs,
+.btn-group-xs > .btn
+{
+  padding: 0.15rem 0.4rem;
   font-size: small;
   line-height: 1.4;
   border-radius: 0.2rem;
+}
 
+#blocRecherche
+{
+  margin-top: 0.5rem;
 }

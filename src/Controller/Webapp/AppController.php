@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class AppController
  * @package App\Controller\Webapp
- * @Route("/", name="cinegest_webapp_app_")
+ * @Route("/app", name="cinegest_webapp_app_")
  */
 class AppController extends AbstractController
 {

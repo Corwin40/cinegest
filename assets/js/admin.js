@@ -20,6 +20,7 @@ import UsersPage from "./pages/UsersPage";
 import VideosPage from "./pages/Videos/VideosPage";
 import DashboardPage from "./pages/DashboardPage";
 import ListSeances from "./pages/Seances/ListSeances";
+import FichesList from "./pages/Adhesions/FichesList";
 import authAPI from "./services/authAPI";
 import AuthContext from "./context/AuthContext";
 
@@ -44,11 +45,15 @@ const Admin = () => {
                 <NavBarWithRouter/>
                 <div className="container-fluid pt-3">
                     <Switch>
+
+                        <Route path="/fiches" component={FichesList} />
                         <Route path="/seances" component={ListSeances} />
 
                         <Route path="/videos" component={VideosPage} />
+
                         <Route path="/users" component={UsersPage} />
-                        <Route path="/" component={DashboardPage} />
+
+                        <Route path="/home" component={DashboardPage} />
                     </Switch>
                 </div>
                 <Footer/>

@@ -76,9 +76,15 @@ class Season
      */
     private $videos;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Adhesion::class, mappedBy="season")
+     */
+    private $adhesions;
+
     public function __construct()
     {
         $this->videos = new ArrayCollection();
+        $this->adhesions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,6 +189,37 @@ class Season
             // set the owning side to null (unless already changed)
             if ($video->getSeason() === $this) {
                 $video->setSeason(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Adhesion[]
+     */
+    public function getAdhesions(): Collection
+    {
+        return $this->adhesions;
+    }
+
+    public function addAdhesion(Adhesion $adhesion): self
+    {
+        if (!$this->adhesions->contains($adhesion)) {
+            $this->adhesions[] = $adhesion;
+            $adhesion->setSeason($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdhesion(Adhesion $adhesion): self
+    {
+        if ($this->adhesions->contains($adhesion)) {
+            $this->adhesions->removeElement($adhesion);
+            // set the owning side to null (unless already changed)
+            if ($adhesion->getSeason() === $this) {
+                $adhesion->setSeason(null);
             }
         }
 

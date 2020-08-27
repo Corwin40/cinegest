@@ -72,7 +72,7 @@ const DashboardPage = () => {
             <div className="col-2">
                 <div className="row">
                     <div className="col-12">
-                        <Card style={{ width: '18rem' }}>
+                        <Card>
                             <Card.Body>
                                 <Card.Title>UTILISATEUR</Card.Title>
                                 <Card.Text>
