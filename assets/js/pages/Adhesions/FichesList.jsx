@@ -69,7 +69,7 @@ const fichesPage = () => {
     const filteredfiches = fiches.filter(
         f =>
             f.title.toLowerCase().includes(search.toLowerCase()) ||
-            f.statut.toLowerCase().includes(search.toLowerCase())
+            f.status.toLowerCase().includes(search.toLowerCase())
     );
 
     // mise en place de l'alimentation des pages de paginations
@@ -380,7 +380,7 @@ const fichesPage = () => {
                     <Form.Row>
                         <Col>
                             <div className="float-left"><h5>Membres</h5></div>
-                            <div className="float-right"><FontAwesomeIcon size="lg" icon={faPlusCircle}/></div>
+                            <div className="float-right"><FontAwesomeIcon size="lg" icon={faPlusCircle} /></div>
                         </Col>
                     </Form.Row>
                 </Modal.Body>

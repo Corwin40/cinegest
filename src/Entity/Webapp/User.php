@@ -10,6 +10,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks
+ *
  * @ApiResource(
  *     normalizationContext={
  *          "groups"={"users_read"}
@@ -203,9 +205,12 @@ class User implements UserInterface
         return $this->createAt;
     }
 
-    public function setCreateAt(?\DateTimeInterface $createAt): self
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setCreateAt(): self
     {
-        $this->createAt = $createAt;
+        $this->createAt = new \DateTime();
 
         return $this;
     }
@@ -215,9 +220,13 @@ class User implements UserInterface
         return $this->updateAt;
     }
 
-    public function setUpdateAt(?\DateTimeInterface $updateAt): self
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function setUpdateAt(): self
     {
-        $this->updateAt = $updateAt;
+        $this->updateAt = new \DateTime();
 
         return $this;
     }
