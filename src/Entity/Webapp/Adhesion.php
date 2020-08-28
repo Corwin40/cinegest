@@ -27,7 +27,7 @@ class Adhesion
     private $type;
 
     /**
-     * @ORM\Column(type="decimal", precision=2, scale=2, nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $cotisation;
 
