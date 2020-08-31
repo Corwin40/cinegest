@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
-import AuthContext from "../context/AuthContext";
-import authAPI from "../services/authAPI";
+import AuthContext from "../../context/AuthContext";
+import authAPI from "../../services/authAPI";
 
 const DashboardPage = () => {
 

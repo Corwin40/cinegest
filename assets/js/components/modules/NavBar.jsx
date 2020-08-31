@@ -58,6 +58,7 @@ const NavBar = ({history}) => {
                         <>
                             <NavDropdown title={"Bienvenue " + user.firstname + " " + user.lastname} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#/home">Mon Compte</NavDropdown.Item>
+                                <NavDropdown.Item href="#/parameters">Parametres</NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout}>Déconnexion</NavDropdown.Item>
                             </NavDropdown>
                         </>

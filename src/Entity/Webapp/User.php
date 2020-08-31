@@ -4,6 +4,8 @@ namespace App\Entity\Webapp;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Webapp\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -85,6 +87,17 @@ class User implements UserInterface
      * @Groups({"users_read"})
      */
     private $updateAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="users")
+     * @Groups({"users_read"})
+     */
+    private $season;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -227,6 +240,18 @@ class User implements UserInterface
     public function setUpdateAt(): self
     {
         $this->updateAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getSeason(): ?self
+    {
+        return $this->season;
+    }
+
+    public function setSeason(?self $season): self
+    {
+        $this->season = $season;
 
         return $this;
     }

@@ -43,7 +43,7 @@ class Adherent
     private $email;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Card::class, inversedBy="adherents")
+     * @ORM\ManyToOne(targetEntity=Card::class, inversedBy="adherent")
      */
     private $card;
 

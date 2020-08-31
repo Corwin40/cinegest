@@ -7,10 +7,16 @@ use App\Repository\Webapp\AdhesionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=AdhesionRepository::class)
+ *
+ * @ApiResource(
+ *     normalizationContext={
+ *      "Groups"={"adhesions_read"}
+ *     }
+ * )
  */
 class Adhesion
 {
@@ -18,28 +24,29 @@ class Adhesion
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"adhesions_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=30)
+     *
+     * @Groups({"adhesions_read", "cards_read"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"adhesions_read"})
      */
     private $cotisation;
 
     /**
      * @ORM\ManyToOne(targetEntity=Season::class, inversedBy="adhesions")
+     * @Groups({"adhesions_read"})
      */
     private $season;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Card::class, mappedBy="adhesion")
-     */
-    private $adress;
 
     /**
      * @ORM\OneToMany(targetEntity=Card::class, mappedBy="adhesion")
@@ -89,37 +96,6 @@ class Adhesion
     public function setSeason(?Season $season): self
     {
         $this->season = $season;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Card[]
-     */
-    public function getAdress(): Collection
-    {
-        return $this->adress;
-    }
-
-    public function addAdress(Card $adress): self
-    {
-        if (!$this->adress->contains($adress)) {
-            $this->adress[] = $adress;
-            $adress->setAdhesion($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdress(Card $adress): self
-    {
-        if ($this->adress->contains($adress)) {
-            $this->adress->removeElement($adress);
-            // set the owning side to null (unless already changed)
-            if ($adress->getAdhesion() === $this) {
-                $adress->setAdhesion(null);
-            }
-        }
 
         return $this;
     }

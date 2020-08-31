@@ -3,9 +3,9 @@ import {Link} from "react-router-dom";
 import moment from "moment";
 // import Bootstrap
 import {Modal, Button} from 'react-bootstrap';
-import UsersAPI from "../../services/Webapp/UsersAPI";
-import VideosAPI from "../../services/Webapp/VideosAPI";
-import Field from "../../components/Forms/Fields";
+import UsersAPI from "../../../services/Webapp/UsersAPI";
+import VideosAPI from "../../../services/Webapp/VideosAPI";
+import Field from "../../../components/Forms/Fields";
 
 
 const VideoForm = ({show, onHide, value, history }) => {

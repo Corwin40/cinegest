@@ -18,16 +18,17 @@ import "react-toastify/dist/ReactToastify.css";
 // liste des imports composants react
 import NavBar from "./components/modules/NavBar";
 import Footer from "./components/modules/Footer";
-import UsersPage from "./pages/UsersPage";
-import VideosPage from "./pages/Videos/VideosPage";
-import DashboardPage from "./pages/DashboardPage";
-import ListSeances from "./pages/Seances/ListSeances";
-import FichesList from "./pages/Adhesions/FichesList";
+import UsersPage from "./pages/Admin/Users/UsersPage";
+import VideosPage from "./pages/Webapp/Videos/VideosPage";
+import DashboardPage from "./pages/Webapp/DashboardPage";
+import ListSeances from "./pages/Admin/Seances/ListSeances";
+import FichesList from "./pages/Webapp/Adhesions/FichesList";
 import authAPI from "./services/authAPI";
 import AuthContext from "./context/AuthContext";
 import PrivateRoute from "./components/tools/PrivateRoute";
 import LoginPage from "./pages/Admin/LoginPage";
 import RegisterForm from "./pages/Admin/Register";
+import ParametersPage from "./pages/Admin/ParametersPages";
 
 // Accès au service de connexion sécurisée
 authAPI.setup();
@@ -54,6 +55,7 @@ const Admin = () => {
                         <PrivateRoute path="/fiches" component={FichesList} />
                         <PrivateRoute path="/seances" component={ListSeances} />
                         <PrivateRoute path="/videos" component={VideosPage} />
+                        <PrivateRoute path="/parameters" component={ParametersPage} />
                         <PrivateRoute path="/users" component={UsersPage} />
 
                         <Route path="/register" component={RegisterForm}/>

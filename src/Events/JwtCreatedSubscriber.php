@@ -15,6 +15,7 @@ class JwtCreatedSubscriber
         $data['id'] = $user->getId();
         $data['firstname'] = $user->getFirstname();
         $data['lastname'] = $user->getLastname();
+        $data['season'] = $user->getSeason();
 
         $event->setData($data);
     }
