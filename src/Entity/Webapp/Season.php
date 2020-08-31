@@ -81,11 +81,17 @@ class Season
      */
     private $cards;
 
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="season")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->videos = new ArrayCollection();
         $this->adhesions = new ArrayCollection();
         $this->cards = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -252,6 +258,37 @@ class Season
             // set the owning side to null (unless already changed)
             if ($card->getSeason() === $this) {
                 $card->setSeason(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setSeason($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getSeason() === $this) {
+                $user->setSeason(null);
             }
         }
 
