@@ -83,21 +83,15 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
      * @Groups({"users_read"})
      */
     private $updateAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Season::class, inversedBy="users")
      * @Groups({"users_read"})
      */
     private $season;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
