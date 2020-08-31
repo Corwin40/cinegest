@@ -4,10 +4,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faUserTimes, faSearch} from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 // import component
-import Pagination from "../../components/tools/Pagination";
-import VideosAPI from "../../services/Webapp/VideosAPI";
-import RowPagination from "../../components/tools/Row_Pagination";
-import Search from "../../components/Forms/Search";
+import Pagination from "../../../components/tools/Pagination";
+import VideosAPI from "../../../services/Webapp/VideosAPI";
+import RowPagination from "../../../components/tools/Row_Pagination";
+import Search from "../../../components/Forms/Search";
 import VideoForm from "./videoForm";
 // Import Bootstrap
 import {Button, Card, Form, Modal} from "react-bootstrap";

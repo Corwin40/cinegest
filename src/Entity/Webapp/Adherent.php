@@ -42,6 +42,11 @@ class Adherent
      */
     private $email;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Card::class, inversedBy="adherent")
+     */
+    private $card;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Adherent
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getCard(): ?Card
+    {
+        return $this->card;
+    }
+
+    public function setCard(?Card $card): self
+    {
+        $this->card = $card;
 
         return $this;
     }

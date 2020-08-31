@@ -44,20 +44,21 @@ const NavBar = ({history}) => {
                     {(!isAuthenticated && (
                         <>
                             <li className="nav-item">
-                                <a className="btn btn-sm btn-secondary mr-1">
+                                <NavLink to="/Register" className="btn btn-sm btn-secondary mr-1">
                                     Inscription
-                                </a>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="btn btn-sm btn-success mr-1">
+                                <NavLink to="/login" className="btn btn-sm btn-success mr-1">
                                     Connexion
-                                </a>
+                                </NavLink>
                             </li>
                         </>
                     )) || (
                         <>
                             <NavDropdown title={"Bienvenue " + user.firstname + " " + user.lastname} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#/home">Mon Compte</NavDropdown.Item>
+                                <NavDropdown.Item href="#/parameters">Parametres</NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout}>Déconnexion</NavDropdown.Item>
                             </NavDropdown>
                         </>

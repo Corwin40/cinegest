@@ -4,12 +4,16 @@ namespace App\Entity\Webapp;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Webapp\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks
+ *
  * @ApiResource(
  *     normalizationContext={
  *          "groups"={"users_read"}
@@ -79,10 +83,15 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
      * @Groups({"users_read"})
      */
     private $updateAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Season::class, inversedBy="users")
+     * @Groups({"users_read"})
+     */
+    private $season;
 
     public function getId(): ?int
     {
@@ -203,9 +212,12 @@ class User implements UserInterface
         return $this->createAt;
     }
 
-    public function setCreateAt(?\DateTimeInterface $createAt): self
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setCreateAt(): self
     {
-        $this->createAt = $createAt;
+        $this->createAt = new \DateTime();
 
         return $this;
     }
@@ -215,9 +227,25 @@ class User implements UserInterface
         return $this->updateAt;
     }
 
-    public function setUpdateAt(?\DateTimeInterface $updateAt): self
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function setUpdateAt(): self
     {
-        $this->updateAt = $updateAt;
+        $this->updateAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getSeason(): ?self
+    {
+        return $this->season;
+    }
+
+    public function setSeason(?self $season): self
+    {
+        $this->season = $season;
 
         return $this;
     }

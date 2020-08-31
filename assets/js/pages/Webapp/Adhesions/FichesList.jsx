@@ -4,11 +4,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faUserTimes, faPlusCircle, faSearch} from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 // import component
-import Pagination from "../../components/tools/Pagination";
-import FichesAPI from "../../services/Webapp/FichesAPI";
+import Pagination from "../../../components/tools/Pagination";
+import FichesAPI from "../../../services/Webapp/FichesAPI";
+import SeasonsAPI from "../../../services/Webapp/SeasonsAPI";
 import {toast} from "react-toastify";
-import RowPagination from "../../components/tools/Row_Pagination";
-import Search from "../../components/Forms/Search";
+import RowPagination from "../../../components/tools/Row_Pagination";
+import Search from "../../../components/Forms/Search";
 // Import Bootstrap
 import {Button, Card, Form, Modal, Col, Row} from "react-bootstrap";
 
@@ -69,7 +70,7 @@ const fichesPage = () => {
     const filteredfiches = fiches.filter(
         f =>
             f.title.toLowerCase().includes(search.toLowerCase()) ||
-            f.statut.toLowerCase().includes(search.toLowerCase())
+            f.status.toLowerCase().includes(search.toLowerCase())
     );
 
     // mise en place de l'alimentation des pages de paginations
@@ -94,23 +95,27 @@ const fichesPage = () => {
     // BLOC POUR MISE A JOUR DE FICHE
     const [ficheUpdate, setFicheUpdate] = useState({
         title:"",
+        adhesion:"",
         adress:"",
         complement:"",
         zipcode:"",
         city:"",
         status:"",
         phone:"",
-        email:""
+        email:"",
+        season:""
     });
     const [ficheUpdateErrors, setFicheUpdateErrors] = useState({
         title:"",
+        adhesion:"",
         adress:"",
         complement:"",
         zipcode:"",
         city:"",
         status:"",
         phone:"",
-        email:""
+        email:"",
+        season:"",
     });
     // Modal de mise à jour d'une Fiche (avec ouverture et fermeture)
     const [fichesUpdateShow, setFichesUpdateShow] = useState(false);
@@ -119,6 +124,20 @@ const fichesPage = () => {
         setFichesUpdateShow(true);
         setFicheUpdate(fiche);
     }
+    // alimentation de la liste de choix pour les types d'adhesions
+    const [adhesion, setAdhesion] = useState([]);
+    const fetchAdhesion = async () => {
+        try{
+            const lstadhesion = await SeasonsAPI.findAll();
+            setAdhesion(lstadhesion);
+            if(!ficheUpdate.adhesion) setFicheUpdate({...ficheUpdate, adhesion: lstadhesion[0].id});
+        } catch (error) {
+            console.log(error.response);
+        }
+    };
+    useEffect(() => {
+        fetchAdhesion()
+    }, []);
     // Mise à jour des champs
     const handleChangeFicheUpdate =({currentTarget})=>{
         const {type, name} = currentTarget;
@@ -135,6 +154,7 @@ const fichesPage = () => {
         const newData = await FichesAPI.findAll();
         setFiches(newData);
     }
+
 
 
     // BLOC POUR LA SUPPRESSION D'UNE FICHE
@@ -187,7 +207,8 @@ const fichesPage = () => {
                             <th className="align-middle"> <Form.Check disabled/></th>
                             <th></th>
                             <th className="align-middle">Titre</th>
-                            <th className="align-middle">Adhesion</th>
+                            <th className="align-middle">Type</th>
+                            <th className="align-middle">Adherent(s)</th>
                             <th className="align-middle">Status</th>
                             <th className="align-middle">Créer le</th>
                             <th className="align-middle">Modifier le</th>
@@ -208,7 +229,8 @@ const fichesPage = () => {
                                     {fiche.title}
                                     </Button>
                                 </td>
-                                <td className="align-middle">type d'adhesion</td>
+                                <td className="align-middle">{fiche.adhesion}</td>
+                                <td className="align-middle">{fiche.adherent.length}</td>
                                 <td className="align-middle">{fiche.status}</td>
                                 <td className="align-middle">{formatDate(fiche.createAt)}</td>
                                 <td className="align-middle">{formatDate(fiche.updateAt)}</td>
@@ -350,7 +372,7 @@ const fichesPage = () => {
                                 </Form.Label>
                                 <Col sm="12">
                                     <Form.Control
-                                        name="tel"
+                                        name="phone"
                                         size="sm"
                                         type="text"
                                         placeholder="Téléphone de contact ..."
@@ -380,7 +402,7 @@ const fichesPage = () => {
                     <Form.Row>
                         <Col>
                             <div className="float-left"><h5>Membres</h5></div>
-                            <div className="float-right"><FontAwesomeIcon size="lg" icon={faPlusCircle}/></div>
+                            <div className="float-right"><FontAwesomeIcon size="lg" icon={faPlusCircle} /></div>
                         </Col>
                     </Form.Row>
                 </Modal.Body>

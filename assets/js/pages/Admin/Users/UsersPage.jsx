@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import moment from "moment";
-import UsersAPI from "../services/Webapp/UsersAPI";
+import UsersAPI from "../../../services/Webapp/UsersAPI";
 import {Link} from "react-router-dom";
 
 // liste des composants importés
-import Pagination from "../components/tools/Pagination";
+import Pagination from "../../../components/tools/Pagination";
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faUserTimes, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Form, Button, Modal, Card } from 'react-bootstrap';
-import Search from "../components/Forms/Search";
+import Search from "../../../components/Forms/Search";
 
 
 const DashboardPage = () => {

@@ -12,20 +12,26 @@ require('bootstrap');
 import React, { useState, useContext} from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // liste des imports composants react
 import NavBar from "./components/modules/NavBar";
 import Footer from "./components/modules/Footer";
-import UsersPage from "./pages/UsersPage";
-import VideosPage from "./pages/Videos/VideosPage";
-import DashboardPage from "./pages/DashboardPage";
-import ListSeances from "./pages/Seances/ListSeances";
-import FichesList from "./pages/Adhesions/FichesList";
+import UsersPage from "./pages/Admin/Users/UsersPage";
+import VideosPage from "./pages/Webapp/Videos/VideosPage";
+import DashboardPage from "./pages/Webapp/DashboardPage";
+import ListSeances from "./pages/Admin/Seances/ListSeances";
+import FichesList from "./pages/Webapp/Adhesions/FichesList";
 import authAPI from "./services/authAPI";
 import AuthContext from "./context/AuthContext";
+import PrivateRoute from "./components/tools/PrivateRoute";
+import LoginPage from "./pages/Admin/LoginPage";
+import RegisterForm from "./pages/Admin/Register";
+import ParametersPage from "./pages/Admin/ParametersPages";
 
+// Accès au service de connexion sécurisée
 authAPI.setup();
-
 
 const Admin = () => {
 
@@ -46,19 +52,22 @@ const Admin = () => {
                 <div className="container-fluid pt-3">
                     <Switch>
 
-                        <Route path="/fiches" component={FichesList} />
-                        <Route path="/seances" component={ListSeances} />
+                        <PrivateRoute path="/fiches" component={FichesList} />
+                        <PrivateRoute path="/seances" component={ListSeances} />
+                        <PrivateRoute path="/videos" component={VideosPage} />
+                        <PrivateRoute path="/parameters" component={ParametersPage} />
+                        <PrivateRoute path="/users" component={UsersPage} />
 
-                        <Route path="/videos" component={VideosPage} />
+                        <Route path="/register" component={RegisterForm}/>
+                        <Route path="/login" component={LoginPage} />
+                        <Route path="/" component={DashboardPage} />
 
-                        <Route path="/users" component={UsersPage} />
-
-                        <Route path="/home" component={DashboardPage} />
                     </Switch>
                 </div>
                 <Footer/>
             </main>
         </HashRouter>
+            <ToastContainer position={toast.POSITION.BOTTOM_RIGHT}/>
         </AuthContext.Provider>
 );
 
@@ -66,5 +75,3 @@ const Admin = () => {
 
 const rootElement = document.querySelector("#Admin");
 ReactDOM.render(<Admin/>, rootElement);
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

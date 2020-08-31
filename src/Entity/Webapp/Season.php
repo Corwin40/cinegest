@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=SeasonRepository::class)
  * @ApiResource(
  *     normalizationContext={
- *          "groups"={"season_read"}
+ *      "groups"={"seasons_read"}
  *     }
  * )
  */
@@ -23,68 +23,75 @@ class Season
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     *
-     * @Groups({"season_read"})
+     * @Groups({"seasons_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=20)
-     *
-     * @Groups({"season_read", "videos_read"})
+     * @Groups({"seasons_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Groups({"season_read"})
+     * @Groups({"seasons_read"})
      */
     private $initAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Groups({"season_read"})
+     * @Groups({"seasons_read"})
      */
     private $endAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Groups({"season_read"})
+     * @Groups({"seasons_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"season_read"})
-     *
+     * @Groups({"seasons_read"})
      */
     private $createAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Groups({"season_read"})
+     * @Groups({"seasons_read"})
      */
     private $updateAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Video::class, mappedBy="season")
-     * @Groups({"season_read"})
+     * @Groups({"seasons_read"})
      */
     private $videos;
 
     /**
      * @ORM\OneToMany(targetEntity=Adhesion::class, mappedBy="season")
+     * @Groups({"seasons_read"})
      */
     private $adhesions;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Card::class, mappedBy="season")
+     * @Groups({"seasons_read"})
+     */
+    private $cards;
+
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="season")
+     */
+    private $users;
 
     public function __construct()
     {
         $this->videos = new ArrayCollection();
         $this->adhesions = new ArrayCollection();
+        $this->cards = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,6 +227,68 @@ class Season
             // set the owning side to null (unless already changed)
             if ($adhesion->getSeason() === $this) {
                 $adhesion->setSeason(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Card[]
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards[] = $card;
+            $card->setSeason($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        if ($this->cards->contains($card)) {
+            $this->cards->removeElement($card);
+            // set the owning side to null (unless already changed)
+            if ($card->getSeason() === $this) {
+                $card->setSeason(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setSeason($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getSeason() === $this) {
+                $user->setSeason(null);
             }
         }
 

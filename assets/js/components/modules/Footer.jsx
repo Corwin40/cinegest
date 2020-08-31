@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className="footer">
             <div className="container-fluid">
-                <p><FontAwesomeIcon icon={faCopyright}/> 2020 - OpenPixl</p>
+                <p><FontAwesomeIcon icon={faCopyright}/> 2020 - OpenPixl | réalisation de ce site à titre gracieux</p>
             </div>
         </footer>
     );
