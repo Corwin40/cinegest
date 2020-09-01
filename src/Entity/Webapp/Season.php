@@ -29,7 +29,7 @@ class Season
 
     /**
      * @ORM\Column(type="string", length=20)
-     * @Groups({"seasons_read"})
+     * @Groups({"seasons_read", "users_read"})
      */
     private $name;
 
@@ -83,6 +83,7 @@ class Season
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="season")
+     * @Groups({"seasons_read"})
      */
     private $users;
 

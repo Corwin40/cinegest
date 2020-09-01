@@ -156,7 +156,6 @@ const fichesPage = () => {
     }
 
 
-
     // BLOC POUR LA SUPPRESSION D'UNE FICHE
     const [ficheDelete, setFicheDelete] = useState([]);
     // Ouverture de la modale

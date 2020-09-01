@@ -68,8 +68,8 @@ function isAuthenticated(){
 function valueUser(){
     const token = window.localStorage.getItem("authToken");
     if (token) {
-        const {id: id, firstname:firstname, lastname:lastname} = jwtDecode(token);
-        return {id, firstname, lastname};
+        const {id: id, firstName:firstName, lastName:lastName} = jwtDecode(token);
+        return {id, firstName, lastName};
     }
 }
 

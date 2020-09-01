@@ -10,7 +10,7 @@ const NavBar = ({history}) => {
 
     const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
     const [user, setUser] = useState(
-        authAPI.valueUser()
+        authAPI.valueUser(),
     );
 
     const handleLogout = () => {
@@ -56,7 +56,7 @@ const NavBar = ({history}) => {
                         </>
                     )) || (
                         <>
-                            <NavDropdown title={"Bienvenue " + user.firstname + " " + user.lastname} id="basic-nav-dropdown">
+                            <NavDropdown title={"Bienvenue " + user.firstName + " " + user.lastName} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#/home">Mon Compte</NavDropdown.Item>
                                 <NavDropdown.Item href="#/parameters">Parametres</NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout}>Déconnexion</NavDropdown.Item>

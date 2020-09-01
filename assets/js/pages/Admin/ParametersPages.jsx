@@ -1,9 +1,14 @@
-import React from "react"
+import React, {useState} from "react"
 
 import authAPI from "../../services/authAPI";
 import SeasonList from "../Admin/Seasons/SeasonList"
+import UsersEdit from "./Users/UsersEdit";
 
 const ParametersPage = () => {
+
+    const [user, setUser] = useState(
+        authAPI.valueUser()
+    );
 
     return (
         <>
@@ -15,11 +20,9 @@ const ParametersPage = () => {
             </div>
         </div>
         <div className="row">
+            <UsersEdit/>
             <SeasonList/>
-            <div className="col-4">
-
-            </div>
-            <div className="col-4">
+            <div className="col-3">
 
             </div>
         </div>

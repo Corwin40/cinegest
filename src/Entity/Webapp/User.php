@@ -238,12 +238,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getSeason(): ?self
+    public function getSeason(): ?Season
     {
         return $this->season;
     }
 
-    public function setSeason(?self $season): self
+    public function setSeason(?Season $season): self
     {
         $this->season = $season;
 

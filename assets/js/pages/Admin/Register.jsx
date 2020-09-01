@@ -15,6 +15,7 @@ const RegisterForm = ({history}) => {
         email: "",
         password: "",
         passwordConfirm: "",
+        season: "/api/seasons/1"
     });
 
     const [errors, setErrors] = useState({
@@ -22,7 +23,8 @@ const RegisterForm = ({history}) => {
         lastName: "",
         email: "",
         password: "",
-        passwordConfirm: ""
+        passwordConfirm: "",
+        season: "/api/seasons/1"
     });
 
     const handleChange = ({currentTarget}) => {
